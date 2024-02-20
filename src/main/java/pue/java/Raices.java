@@ -30,30 +30,31 @@ public class Raices {
     }
 
     public boolean tieneRaices(){
-
         return getDiscriminante() > 0;
     }
 
-    public void obtenerRaiz(){
+    public Soluciones obtenerRaiz(){
         double raiz = -b/2*a;
-        System.out.println("Unica Raiz: " + raiz);
+        return new Soluciones(raiz, 0, false);
     }
-    public void obtenerRaices(){
+    public Soluciones obtenerRaices(){
         double raizDiscriminante = Math.sqrt(getDiscriminante());
-        double raizPositiva = (-b+raizDiscriminante)/2*a;
-        double raizNegativa = (-b-raizDiscriminante)/2*a;
-        System.out.println("Raiz 1: " + raizPositiva);
-        System.out.println("Raiz 2: " + raizNegativa);
+        double raizDiscriminantePositivo = (-b+raizDiscriminante)/2*a;
+        double raizDiscriminanteNegativo = (-b-raizDiscriminante)/2*a;
+        return new Soluciones(raizDiscriminantePositivo, raizDiscriminanteNegativo, true);
     }
 
-    public void calcular(){
+    public Soluciones calcular(){
+
         if (tieneRaiz()){
-            obtenerRaiz();
+            return obtenerRaiz();
         } else if (tieneRaices()) {
-            obtenerRaices();
-        }else {
-            System.out.println("La ecuación no tiene solucion Real");
+            return obtenerRaices();
+        } else {
+            throw new IllegalArgumentException("La ecuación no tiene solucion Real");
         }
     }
+
+
 
 }
